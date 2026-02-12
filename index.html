@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StratEdge Global | Strategy. Talent. Transformation.</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
+
+body { line-height:1.6; color:#1f2937; }
+
+header {
+  background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)),
+  url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d') center/cover;
+  color:white;
+  padding:120px 20px;
+  text-align:center;
+}
+
+header h1 { font-size:3rem; margin-bottom:20px; }
+
+section { padding:80px 20px; max-width:1100px; margin:auto; }
+
+h2 { text-align:center; margin-bottom:40px; }
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+
+.card {
+  background:#f9fafb;
+  padding:25px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+form {
+  background:#f3f4f6;
+  padding:30px;
+  border-radius:10px;
+  max-width:700px;
+  margin:auto;
+}
+
+input, textarea {
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border:1px solid #ccc;
+  border-radius:6px;
+}
+
+button {
+  padding:12px 25px;
+  background:#111827;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+button:hover { background:#2563eb; }
+
+footer {
+  background:#111827;
+  color:#9ca3af;
+  text-align:center;
+  padding:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Strategy. Talent. Transformation.</h1>
+  <p>Integrated strategic advisory, executive search, and leadership development for future-ready organizations.</p>
+</header>
+
+<section>
+  <div class="section-title">
+        <h2>Our Integrated Offerings</h2>
+        <p>Blending strategic consulting with world-class talent solutions</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Strategic Advisory & Execution</h3>
+            <p>Business strategy, operating model design, fractional CXO services (CHRO, CFO, Chief of Staff), and transformation execution support to accelerate growth and operational excellence.</p>
+        </div>
+
+        <div class="card">
+            <h3>Global Executive Search</h3>
+            <p>Leadership hiring across industries with data-driven market intelligence, succession planning, and confidential executive placements worldwide.</p>
+        </div>
+
+        <div class="card">
+            <h3>Talent Strategy & Workforce Design</h3>
+            <p>Competency frameworks, workforce planning, talent architecture, and organizational design aligned with long-term business strategy.</p>
+        </div>
+
+        <div class="card">
+            <h3>Leadership Assessment & Development</h3>
+            <p>Evidence-based assessments, executive coaching, leadership journeys, and capability-building programs to create high-performance cultures.</p>
+        </div>
+
+        <div class="card">
+            <h3>Performance & Rewards Consulting</h3>
+            <p>Compensation benchmarking, total rewards strategy, and performance systems to drive engagement and accountability.</p>
+        </div>
+
+        <div class="card">
+            <h3>Transformation & Change Management</h3>
+            <p>Structured transformation programs integrating people, process, and technology to deliver measurable business impact.</p>
+        </div>
+    </div>
+</section>
+/<section class="highlight">
+    <div class="section-title">
+        <h2>Why We Are Different</h2>
+    </div>
+    <div class="grid">
+        <div class="card">
+            <h3>Strategy + Talent in One Model</h3>
+            <p>Unlike traditional firms, we integrate business strategy with leadership and workforce execution for measurable outcomes.</p>
+        </div>
+
+        <div class="card">
+            <h3>Global Reach, Local Expertise</h3>
+            <p>Combining global executive networks with contextual market insights across emerging and developed markets.</p>
+        </div>
+
+        <div class="card">
+            <h3>Execution-Focused Approach</h3>
+            <p>We go beyond advisory—partnering through implementation, governance, and capability building.</p>
+        </div>
+    </div>
+</section>
+
+
+<section>
+  <h2>Contact Us</h2>
+  <form id="contactForm">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="text" id="company" placeholder="Company">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="text" id="phone" placeholder="Phone">
+    <input type="text" id="service" placeholder="Service Required">
+    <textarea id="message" placeholder="Your Message"></textarea>
+    <button type="submit">Submit</button>
+  </form>
+</section>
+
+<section>
+  <h2>Submit Your Leadership Profile</h2>
+  <form id="candidateForm">
+    <input type="text" id="cname" placeholder="Full Name" required>
+    <input type="email" id="cemail" placeholder="Email" required>
+    <input type="file" id="resume" required>
+    <button type="submit">Upload Resume</button>
+  </form>
+</section>
+
+<footer>
+  © 2026 StratEdge Global. All Rights Reserved.
+</footer>
+
+<script>
+/* =========================
+   STEP 4 – SUPABASE CONNECT
+========================= */
+
+const supabaseUrl = https://mngofmadccivssqctxmk.supabase.co;
+const supabaseKey = "sb_publishable_6yGHYjxmWpQhYSEd6L5uQw_PowTsjmD";
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+/* =========================
+   CONTACT FORM (LEADS)
+========================= */
+
+document.getElementById("contactForm")
+.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const { error } = await supabaseClient
+    .from("leads")
+    .insert([{
+      name: name.value,
+      company: company.value,
+      email: email.value,
+      phone: phone.value,
+      service: service.value,
+      message: message.value
+    }]);
+
+  if (!error) {
+    alert("Thank you! Our team will contact you shortly.");
+    contactForm.reset();
+  } else {
+    alert("Submission failed.");
+  }
+});
+
+/* =========================
+   STEP 5 – RESUME UPLOAD
+========================= */
+
+document.getElementById("candidateForm")
+.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const file = resume.files[0];
+  const fileName = Date.now() + "_" + file.name;
+
+  const { error: uploadError } = await supabaseClient
+    .storage
+    .from("resumes")
+    .upload(fileName, file);
+
+  if (uploadError) {
+    alert("Resume upload failed.");
+    return;
+  }
+
+  const { error: dbError } = await supabaseClient
+    .from("candidates")
+    .insert([{
+      name: cname.value,
+      email: cemail.value,
+      resume_url: fileName
+    }]);
+
+  if (!dbError) {
+    alert("Profile submitted successfully!");
+    candidateForm.reset();
+  } else {
+    alert("Database error occurred.");
+  }
+});
+</script>
+
+</body>
+</html>
