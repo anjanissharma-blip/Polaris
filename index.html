@@ -3,343 +3,306 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StratEdge Global | Strategy. Talent. Transformation.</title>
+<title>Polaris Consultants | Strategy. Talent. Transformation.</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+body{line-height:1.6;color:#1f2937;}
 
-body {
-    line-height: 1.6;
-    color: #1f2937;
-}
-
-header {
-    background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)),
+header{
+    background: linear-gradient(rgba(10,25,47,0.85),rgba(10,25,47,0.85)),
     url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d') center/cover no-repeat;
-    color: white;
-    padding: 120px 20px;
-    text-align: center;
+    color:white;
+    padding:160px 20px 120px;
+    text-align:center;
 }
 
-header h1 {
-    font-size: 3rem;
-    font-weight: 700;
+.hero-content{
+    max-width:900px;
+    margin:auto;
 }
 
-header p {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    opacity: 0.9;
+.logo{
+    width:340px;
+    max-width:90%;
+    margin-bottom:35px;
+    filter: drop-shadow(0px 10px 25px rgba(0,0,0,0.5));
 }
 
-.btn {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 14px 28px;
-    background: #2563eb;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: 0.3s;
+header h1{
+    font-size:2.8rem;
+    margin-bottom:20px;
 }
 
-.btn:hover {
-    background: #1d4ed8;
+header p{
+    max-width:650px;
+    margin:auto;
+    font-weight:300;
 }
 
-section {
-    padding: 80px 20px;
-    max-width: 1200px;
-    margin: auto;
+section{
+    padding:80px 20px;
+    max-width:1200px;
+    margin:auto;
 }
 
-.section-title {
-    text-align: center;
-    margin-bottom: 50px;
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
 }
 
-h2 { 
-  text-align:center; 
-  margin-bottom:40px; 
-  
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+.card{
+    background:#f8fafc;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    transition:0.3s;
 }
 
-.card {
-    background: #f8fafc;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: 0.3s;
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
 }
 
-.card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+.card-content{
+    padding:25px;
 }
 
-.card-content {
-    padding: 25px;
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 12px 30px rgba(0,0,0,0.08);
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
-
-.highlight {
-    background: linear-gradient(rgba(239,246,255,0.9), rgba(239,246,255,0.9)),
+.highlight{
+    background:linear-gradient(rgba(239,246,255,0.9),rgba(239,246,255,0.9)),
     url('https://images.unsplash.com/photo-1552664730-d307ca884978') center/cover no-repeat;
 }
-form {
-  background:#f3f4f6;
-  padding:30px;
-  border-radius:10px;
-  max-width:700px;
-  margin:auto;
 
-.cta {
-    background: linear-gradient(rgba(15,23,42,0.9), rgba(15,23,42,0.9)),
-    url('https://images.unsplash.com/photo-1507679799987-c73779587ccf') center/cover no-repeat;
-    color: white;
-    text-align: center;
-    padding: 100px 20px;
-}
-button {
-  padding:12px 25px;
-  background:#111827;
-  color:white;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
+form{
+    background:#f3f4f6;
+    padding:30px;
+    border-radius:10px;
+    max-width:700px;
+    margin:auto;
 }
 
-button:hover { background:#2563eb; }
-
-input, textarea {
-  width:100%;
-  padding:12px;
-  margin-bottom:15px;
-  border:1px solid #ccc;
-  border-radius:6px;
-}
-footer {
-  background:#111827;
-  color:#9ca3af;
-  text-align:center;
-  padding:30px;
+input,textarea{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:6px;
 }
 
+button{
+    padding:12px 25px;
+    background:#0a1931;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+footer{
+    background:#0a1931;
+    color:#9ca3af;
+    text-align:center;
+    padding:30px;
+    font-size:14px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>Strategy. Talent. Transformation.</h1>
-    <p>We integrate strategic advisory, executive search, and leadership development to build future-ready organizations that outperform and scale globally.</p>
-    <a href="#contact" class="btn">Partner With Us</a>
+    <div class="hero-content">
+        <img 
+        src="https://raw.githubusercontent.com/anjanissharma-blip/Polaris/main/logo.jpeg" 
+        alt="Polaris Consultants Logo" 
+        class="logo">
+
+        <h1>Strategy. Talent. Transformation.</h1>
+        <p>Integrated strategic advisory, executive search, and leadership development for future-ready organizations.</p>
+    </div>
 </header>
 
 <section>
-    <div class="section-title">
-        <h2>Our Integrated Offerings</h2>
-        <p>Blending strategic consulting with world-class talent solutions</p>
-    </div>
+<div class="section-title">
+<h2>Our Integrated Offerings</h2>
+<p>Blending strategic consulting with world-class talent solutions</p>
+</div>
 
-    <div class="grid">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" alt="Strategy Consulting">
-            <div class="card-content">
-                <h3>Strategic Advisory & Execution</h3>
-                <p>Business strategy, operating model design, fractional CXO services, and transformation execution support.</p>
-            </div>
-        </div>
+<div class="grid">
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" alt="Executive Search">
-            <div class="card-content">
-                <h3>Global Executive Search</h3>
-                <p>Leadership hiring across industries with data-driven intelligence and succession planning.</p>
-            </div>
-        </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40">
+<div class="card-content">
+<h3>Strategic Advisory & Execution</h3>
+<p>Business strategy, operating model design, fractional CXO services, and transformation execution support.</p>
+</div>
+</div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984" alt="Talent Strategy">
-            <div class="card-content">
-                <h3>Talent Strategy & Workforce Design</h3>
-                <p>Workforce planning, competency frameworks, and organizational design aligned with business strategy.</p>
-            </div>
-        </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+<div class="card-content">
+<h3>Global Executive Search</h3>
+<p>Leadership hiring across industries with data-driven intelligence and succession planning.</p>
+</div>
+</div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c" alt="Leadership Development">
-            <div class="card-content">
-                <h3>Leadership Assessment & Development</h3>
-                <p>Executive coaching, leadership journeys, and high-performance culture building.</p>
-            </div>
-        </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1553877522-43269d4ea984">
+<div class="card-content">
+<h3>Talent Strategy & Workforce Design</h3>
+<p>Workforce planning, competency frameworks, and organizational design aligned with business strategy.</p>
+</div>
+</div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d" alt="Rewards Consulting">
-            <div class="card-content">
-                <h3>Performance & Rewards Consulting</h3>
-                <p>Compensation benchmarking and total rewards strategy to drive engagement.</p>
-            </div>
-        </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c">
+<div class="card-content">
+<h3>Leadership Assessment & Development</h3>
+<p>Executive coaching and high-performance culture building.</p>
+</div>
+</div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" alt="Transformation">
-            <div class="card-content">
-                <h3>Transformation & Change Management</h3>
-                <p>Structured transformation integrating people, process, and technology for measurable impact.</p>
-            </div>
-        </div>
-    </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d">
+<div class="card-content">
+<h3>Performance & Rewards Consulting</h3>
+<p>Compensation benchmarking and total rewards strategy.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d">
+<div class="card-content">
+<h3>Transformation & Change Management</h3>
+<p>Structured transformation integrating people, process, and technology.</p>
+</div>
+</div>
+
+</div>
 </section>
+
 <section class="highlight">
-    <div class="section-title">
-        <h2>Why We Are Different</h2>
-    </div>
-    <div class="grid">
-        <div class="card">
-            <div class="card-content">
-                <h3>Strategy + Talent in One Model</h3>
-                <p>Integrated business and people advisory delivering measurable results.</p>
-            </div>
-        </div>
+<div class="section-title">
+<h2>Why We Are Different</h2>
+</div>
 
-        <div class="card">
-            <div class="card-content">
-                <h3>Global Reach, Local Expertise</h3>
-                <p>Global executive networks with strong emerging market insights.</p>
-            </div>
-        </div>
+<div class="grid">
+<div class="card"><div class="card-content">
+<h3>Strategy + Talent Integration</h3>
+<p>We align business direction with leadership capability.</p>
+</div></div>
 
-        <div class="card">
-            <div class="card-content">
-                <h3>Execution-Focused Approach</h3>
-                <p>Advisory plus hands-on implementation and capability building.</p>
-            </div>
-        </div>
-    </div>
+<div class="card"><div class="card-content">
+<h3>Execution Focused</h3>
+<p>Beyond advisory — real implementation support.</p>
+</div></div>
+
+<div class="card"><div class="card-content">
+<h3>Global Perspective</h3>
+<p>Strong emerging market expertise with global reach.</p>
+</div></div>
+</div>
 </section>
 
 <section>
-  <h2>Contact Us</h2>
-  <form id="contactForm">
-    <input type="text" id="name" placeholder="Full Name" required>
-    <input type="text" id="company" placeholder="Company">
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="text" id="phone" placeholder="Phone">
-    <input type="text" id="service" placeholder="Service Required">
-    <textarea id="message" placeholder="Your Message"></textarea>
-    <button type="submit">Submit</button>
-  </form>
+<h2>Contact Us</h2>
+<form id="contactForm">
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="text" id="company" placeholder="Company">
+<input type="email" id="email" placeholder="Email" required>
+<input type="text" id="phone" placeholder="Phone">
+<input type="text" id="service" placeholder="Service Required">
+<textarea id="message" placeholder="Your Message"></textarea>
+<button type="submit">Submit</button>
+</form>
 </section>
 
 <section>
-  <h2>Submit Your Leadership Profile</h2>
-  <form id="candidateForm">
-    <input type="text" id="cname" placeholder="Full Name" required>
-    <input type="email" id="cemail" placeholder="Email" required>
-    <input type="file" id="resume" required>
-    <button type="submit">Upload Resume</button>
-  </form>
+<h2>Submit Your Leadership Profile</h2>
+<form id="candidateForm">
+<input type="text" id="cname" placeholder="Full Name" required>
+<input type="email" id="cemail" placeholder="Email" required>
+<input type="file" id="resume" required>
+<button type="submit">Upload Resume</button>
+</form>
 </section>
 
 <footer>
-© 2026 ACES </footer>
+© 2026 ACES. All Rights Reserved.
+</footer>
 
 <script>
-/* =========================
-   STEP 4 – SUPABASE CONNECT
-========================= */
+const supabaseUrl="https://mngofmadccivssqctxmk.supabase.co";
+const supabaseKey="sb_publishable_6yGHYjxmWpQhYSEd6L5uQw_PowTsjmD";
+const supabaseClient=supabase.createClient(supabaseUrl,supabaseKey);
 
-const supabaseUrl = https://mngofmadccivssqctxmk.supabase.co;
-const supabaseKey = "sb_publishable_6yGHYjxmWpQhYSEd6L5uQw_PowTsjmD";
-const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
-/* =========================
-   CONTACT FORM (LEADS)
-========================= */
-
+// CONTACT FORM
 document.getElementById("contactForm")
-.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const { error } = await supabaseClient
-    .from("leads")
-    .insert([{
-      name: name.value,
-      company: company.value,
-      email: email.value,
-      phone: phone.value,
-      service: service.value,
-      message: message.value
-    }]);
-
-  if (!error) {
-    alert("Thank you! Our team will contact you shortly.");
-    contactForm.reset();
-  } else {
-    alert("Submission failed.");
-  }
+.addEventListener("submit",async(e)=>{
+e.preventDefault();
+const{error}=await supabaseClient.from("leads").insert([{
+name:name.value,
+company:company.value,
+email:email.value,
+phone:phone.value,
+service:service.value,
+message:message.value
+}]);
+if(!error){alert("Message sent successfully");e.target.reset();}
+else{console.error(error);alert("Error submitting form. All fields are mandatory");}
 });
 
-/* =========================
-   STEP 5 – RESUME UPLOAD
-========================= */
-
+// RESUME UPLOAD
 document.getElementById("candidateForm")
-.addEventListener("submit", async (e) => {
-  e.preventDefault();
+.addEventListener("submit",async(e)=>{
+e.preventDefault();
+const file=resume.files[0];
+if(!file)return alert("Upload resume");
 
-  const file = resume.files[0];
-  const fileName = Date.now() + "_" + file.name;
+const fileName=Date.now()+"_"+file.name;
 
-  const { error: uploadError } = await supabaseClient
-    .storage
-    .from("resumes")
-    .upload(fileName, file);
+const{error:uploadError}=await supabaseClient
+.storage.from("resumes")
+.upload(fileName,file);
 
-  if (uploadError) {
-    alert("Resume upload failed.");
-    return;
-  }
+if(uploadError){
+console.error(uploadError);
+return alert("Upload failed - check storage policy");
+}
 
-  const { error: dbError } = await supabaseClient
-    .from("candidates")
-    .insert([{
-      name: cname.value,
-      email: cemail.value,
-      resume_url: fileName
-    }]);
+const{error:dbError}=await supabaseClient
+.from("candidates")
+.insert([{
+name:cname.value,
+email:cemail.value,
+resume_url:fileName
+}]);
 
-  if (!dbError) {
-    alert("Profile submitted successfully!");
-    candidateForm.reset();
-  } else {
-    alert("Database error occurred.");
-  }
+if(!dbError){alert("Profile submitted successfully");e.target.reset();}
+else{console.error(dbError);alert("Database error");}
 });
 </script>
 
 </body>
 </html>
+
+
