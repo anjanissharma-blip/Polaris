@@ -5,56 +5,122 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StratEdge Global | Strategy. Talent. Transformation.</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
-
-body { line-height:1.6; color:#1f2937; }
-
-header {
-  background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)),
-  url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d') center/cover;
-  color:white;
-  padding:120px 20px;
-  text-align:center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
-header h1 { font-size:3rem; margin-bottom:20px; }
+body {
+    line-height: 1.6;
+    color: #1f2937;
+}
 
-section { padding:80px 20px; max-width:1100px; margin:auto; }
+header {
+    background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)),
+    url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d') center/cover no-repeat;
+    color: white;
+    padding: 120px 20px;
+    text-align: center;
+}
 
-h2 { text-align:center; margin-bottom:40px; }
+header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+header p {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.9;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 28px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #1d4ed8;
+}
+
+section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+h2 { 
+  text-align:center; 
+  margin-bottom:40px; 
+  
+}
 
 .grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
 }
 
 .card {
-  background:#f9fafb;
-  padding:25px;
-  border-radius:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    background: #f8fafc;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.3s;
 }
 
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 25px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.highlight {
+    background: linear-gradient(rgba(239,246,255,0.9), rgba(239,246,255,0.9)),
+    url('https://images.unsplash.com/photo-1552664730-d307ca884978') center/cover no-repeat;
+}
 form {
   background:#f3f4f6;
   padding:30px;
   border-radius:10px;
   max-width:700px;
   margin:auto;
-}
 
-input, textarea {
-  width:100%;
-  padding:12px;
-  margin-bottom:15px;
-  border:1px solid #ccc;
-  border-radius:6px;
+.cta {
+    background: linear-gradient(rgba(15,23,42,0.9), rgba(15,23,42,0.9)),
+    url('https://images.unsplash.com/photo-1507679799987-c73779587ccf') center/cover no-repeat;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
 }
-
 button {
   padding:12px 25px;
   background:#111827;
@@ -66,82 +132,114 @@ button {
 
 button:hover { background:#2563eb; }
 
+input, textarea {
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border:1px solid #ccc;
+  border-radius:6px;
+}
 footer {
   background:#111827;
   color:#9ca3af;
   text-align:center;
   padding:30px;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Strategy. Talent. Transformation.</h1>
-  <p>Integrated strategic advisory, executive search, and leadership development for future-ready organizations.</p>
+    <h1>Strategy. Talent. Transformation.</h1>
+    <p>We integrate strategic advisory, executive search, and leadership development to build future-ready organizations that outperform and scale globally.</p>
+    <a href="#contact" class="btn">Partner With Us</a>
 </header>
 
 <section>
-  <div class="section-title">
+    <div class="section-title">
         <h2>Our Integrated Offerings</h2>
         <p>Blending strategic consulting with world-class talent solutions</p>
     </div>
 
     <div class="grid">
         <div class="card">
-            <h3>Strategic Advisory & Execution</h3>
-            <p>Business strategy, operating model design, fractional CXO services (CHRO, CFO, Chief of Staff), and transformation execution support to accelerate growth and operational excellence.</p>
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" alt="Strategy Consulting">
+            <div class="card-content">
+                <h3>Strategic Advisory & Execution</h3>
+                <p>Business strategy, operating model design, fractional CXO services, and transformation execution support.</p>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Global Executive Search</h3>
-            <p>Leadership hiring across industries with data-driven market intelligence, succession planning, and confidential executive placements worldwide.</p>
+            <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" alt="Executive Search">
+            <div class="card-content">
+                <h3>Global Executive Search</h3>
+                <p>Leadership hiring across industries with data-driven intelligence and succession planning.</p>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Talent Strategy & Workforce Design</h3>
-            <p>Competency frameworks, workforce planning, talent architecture, and organizational design aligned with long-term business strategy.</p>
+            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984" alt="Talent Strategy">
+            <div class="card-content">
+                <h3>Talent Strategy & Workforce Design</h3>
+                <p>Workforce planning, competency frameworks, and organizational design aligned with business strategy.</p>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Leadership Assessment & Development</h3>
-            <p>Evidence-based assessments, executive coaching, leadership journeys, and capability-building programs to create high-performance cultures.</p>
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c" alt="Leadership Development">
+            <div class="card-content">
+                <h3>Leadership Assessment & Development</h3>
+                <p>Executive coaching, leadership journeys, and high-performance culture building.</p>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Performance & Rewards Consulting</h3>
-            <p>Compensation benchmarking, total rewards strategy, and performance systems to drive engagement and accountability.</p>
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d" alt="Rewards Consulting">
+            <div class="card-content">
+                <h3>Performance & Rewards Consulting</h3>
+                <p>Compensation benchmarking and total rewards strategy to drive engagement.</p>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Transformation & Change Management</h3>
-            <p>Structured transformation programs integrating people, process, and technology to deliver measurable business impact.</p>
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" alt="Transformation">
+            <div class="card-content">
+                <h3>Transformation & Change Management</h3>
+                <p>Structured transformation integrating people, process, and technology for measurable impact.</p>
+            </div>
         </div>
     </div>
 </section>
-/<section class="highlight">
+<section class="highlight">
     <div class="section-title">
         <h2>Why We Are Different</h2>
     </div>
     <div class="grid">
         <div class="card">
-            <h3>Strategy + Talent in One Model</h3>
-            <p>Unlike traditional firms, we integrate business strategy with leadership and workforce execution for measurable outcomes.</p>
+            <div class="card-content">
+                <h3>Strategy + Talent in One Model</h3>
+                <p>Integrated business and people advisory delivering measurable results.</p>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Global Reach, Local Expertise</h3>
-            <p>Combining global executive networks with contextual market insights across emerging and developed markets.</p>
+            <div class="card-content">
+                <h3>Global Reach, Local Expertise</h3>
+                <p>Global executive networks with strong emerging market insights.</p>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Execution-Focused Approach</h3>
-            <p>We go beyond advisory—partnering through implementation, governance, and capability building.</p>
+            <div class="card-content">
+                <h3>Execution-Focused Approach</h3>
+                <p>Advisory plus hands-on implementation and capability building.</p>
+            </div>
         </div>
     </div>
 </section>
-
 
 <section>
   <h2>Contact Us</h2>
@@ -167,8 +265,7 @@ footer {
 </section>
 
 <footer>
-  © 2026 StratEdge Global. All Rights Reserved.
-</footer>
+© 2026 ACES </footer>
 
 <script>
 /* =========================
