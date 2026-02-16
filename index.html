@@ -255,26 +255,48 @@ const supabaseUrl="https://mngofmadccivssqctxmk.supabase.co";
 const supabaseKey="sb_publishable_6yGHYjxmWpQhYSEd6L5uQw_PowTsjmD";
 const supabaseClient=supabase.createClient(supabaseUrl,supabaseKey);
 
+// 🔹 REPLACE WITH YOUR EDGE FUNCTION URL
+const emailFunctionUrl = "https://YOUR_PROJECT_ID.supabase.co/functions/v1/send-email";
+
 // CONTACT FORM
 document.getElementById("contactForm")
 .addEventListener("submit",async(e)=>{
 e.preventDefault();
-const{error}=await supabaseClient.from("leads").insert([{
+
+const formData = {
 name:name.value,
 company:company.value,
 email:email.value,
 phone:phone.value,
 service:service.value,
 message:message.value
-}]);
-if(!error){alert("Message sent successfully");e.target.reset();}
-else{console.error(error);alert("Error submitting form. All fields are mandatory");}
+};
+
+const{error}=await supabaseClient.from("leads").insert([formData]);
+
+if(error){
+console.error(error);
+return alert("Error submitting form");
+}
+
+await fetch(emailFunctionUrl,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+type:"contact",
+data:formData
+})
+});
+
+alert("Message sent successfully");
+e.target.reset();
 });
 
 // RESUME UPLOAD
 document.getElementById("candidateForm")
 .addEventListener("submit",async(e)=>{
 e.preventDefault();
+
 const file=resume.files[0];
 if(!file)return alert("Upload resume");
 
@@ -289,16 +311,32 @@ console.error(uploadError);
 return alert("Upload failed - check storage policy");
 }
 
-const{error:dbError}=await supabaseClient
-.from("candidates")
-.insert([{
+const candidateData={
 name:cname.value,
 email:cemail.value,
 resume_url:fileName
-}]);
+};
 
-if(!dbError){alert("Profile submitted successfully");e.target.reset();}
-else{console.error(dbError);alert("Database error");}
+const{error:dbError}=await supabaseClient
+.from("candidates")
+.insert([candidateData]);
+
+if(dbError){
+console.error(dbError);
+return alert("Database error");
+}
+
+await fetch(emailFunctionUrl,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+type:"candidate",
+data:candidateData
+})
+});
+
+alert("Profile submitted successfully");
+e.target.reset();
 });
 </script>
 
