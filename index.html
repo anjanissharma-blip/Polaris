@@ -153,7 +153,7 @@ footer{
 <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40">
 <div class="card-content">
 <h3>Strategic Advisory & Execution</h3>
-<p>Business strategy, operating model design, fractional CXO services, and transformation execution support.</p>
+<p>Business strategy, fractional CXO services, Culture Building and transformation execution support.</p>
 </div>
 </div>
 
@@ -161,7 +161,7 @@ footer{
 <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
 <div class="card-content">
 <h3>Global Executive Search</h3>
-<p>Leadership hiring across industries with data-driven intelligence and succession planning.</p>
+<p>Leadership hiring across industries with data-driven intelligence, profile match through robust talent assessment process.</p>
 </div>
 </div>
 
@@ -169,7 +169,7 @@ footer{
 <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984">
 <div class="card-content">
 <h3>Talent Strategy & Workforce Design</h3>
-<p>Workforce planning, competency frameworks, and organizational design aligned with business strategy.</p>
+<p>Organizational design, workforce planning and competency frameworks aligned with business strategy..</p>
 </div>
 </div>
 
@@ -177,7 +177,11 @@ footer{
 <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c">
 <div class="card-content">
 <h3>Leadership Assessment & Development</h3>
-<p>Executive coaching and high-performance culture building.</p>
+<p>Developing Talent Management Strategy
+Talent Assessment and Development Centers
+Leadership Development Plan
+Executive coaching
+High-Performance Team building</p>
 </div>
 </div>
 
@@ -185,7 +189,7 @@ footer{
 <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d">
 <div class="card-content">
 <h3>Performance & Rewards Consulting</h3>
-<p>Compensation benchmarking and total rewards strategy.</p>
+<p>Design Performance Management Framework, Compensation design, Policy Framework and Total Rewards strategy.</p>
 </div>
 </div>
 
@@ -224,7 +228,10 @@ footer{
 </section>
 
 <section>
-<h2>Contact Us</h2>
+<div class="section-title">
+    <h2>Contact Us</h2>
+</div>
+
 <form id="contactForm">
 <input type="text" id="name" placeholder="Full Name" required>
 <input type="text" id="company" placeholder="Company">
@@ -237,7 +244,9 @@ footer{
 </section>
 
 <section>
+<div class="section-title">
 <h2>Submit Your Leadership Profile</h2>
+</div>
 <form id="candidateForm">
 <input type="text" id="cname" placeholder="Full Name" required>
 <input type="email" id="cemail" placeholder="Email" required>
@@ -249,47 +258,37 @@ footer{
 <footer>
 © 2026 ACES. All Rights Reserved.
 </footer>
-
 <script>
 const supabaseUrl="https://mngofmadccivssqctxmk.supabase.co";
 const supabaseKey="sb_publishable_6yGHYjxmWpQhYSEd6L5uQw_PowTsjmD";
 const supabaseClient=supabase.createClient(supabaseUrl,supabaseKey);
 
-// 🔹 REPLACE WITH YOUR EDGE FUNCTION URL
-const emailFunctionUrl = "https://mngofmadccivssqctxmk.supabase.co/functions/v1/send-email";
 
 // CONTACT FORM
 document.getElementById("contactForm")
-.addEventListener("submit",async(e)=>{
-e.preventDefault();
+.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-const formData = {
-name:name.value,
-company:company.value,
-email:email.value,
-phone:phone.value,
-service:service.value,
-message:message.value
-};
+  const formData = {
+    name: document.getElementById("name").value,
+    company: document.getElementById("company").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    service: document.getElementById("service").value,
+    message: document.getElementById("message").value
+  };
 
-const{error}=await supabaseClient.from("leads").insert([formData]);
+  const { error } = await supabaseClient
+    .from("leads")
+    .insert([formData]);
 
-if(error){
-console.error(error);
-return alert("Error submitting form");
-}
+  if (error) {
+    console.error(error);
+    return alert("Error submitting form");
+  }
 
-await fetch(emailFunctionUrl,{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({
-type:"contact",
-data:formData
-})
-});
-
-alert("Message sent successfully");
-e.target.reset();
+  alert("Message sent successfully");
+  e.target.reset();
 });
 
 // RESUME UPLOAD
@@ -311,10 +310,10 @@ console.error(uploadError);
 return alert("Upload failed - check storage policy");
 }
 
-const candidateData={
-name:cname.value,
-email:cemail.value,
-resume_url:fileName
+const candidateData = {
+  name: document.getElementById("cname").value,
+  email: document.getElementById("cemail").value,
+  resume_url: fileName
 };
 
 const{error:dbError}=await supabaseClient
@@ -326,14 +325,6 @@ console.error(dbError);
 return alert("Database error");
 }
 
-await fetch(emailFunctionUrl,{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({
-type:"candidate",
-data:candidateData
-})
-});
 
 alert("Profile submitted successfully");
 e.target.reset();
@@ -342,5 +333,3 @@ e.target.reset();
 
 </body>
 </html>
-
-
